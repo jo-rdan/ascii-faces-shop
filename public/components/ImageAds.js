@@ -1,10 +1,13 @@
 import React from "react";
 
-function ImageAds(props) {
+function ImageAds({ className }) {
   return (
     <div>
       <img
-        src={`http://localhost:3000/ads?r=${Math.floor(Math.random() * 1000)}`}
+        src={`http://localhost:3000/ads?r=${setTimeout(() => {
+          newNumber ? newNumber : 0;
+        }, 2000)}`}
+        className={className}
       />
     </div>
   );
