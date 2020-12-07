@@ -1,13 +1,11 @@
 # Products Grid
 
-This is an ecommerce site, where you can buy all sorts of ascii faces like `(ノ・∀・)ノ` and `¯_(ツ)_/¯`, in a wide variety of font sizes. The homepage should display a list of products for people to browse.
-
-Please read the instructions and FAQ below before beginning.
+This is an ecommerce site, where you can buy all sorts of ascii faces like `(ノ・∀・)ノ` and `¯_(ツ)_/¯`, in a wide variety of font sizes.
 
 ## Features
 
 - [x] products are displayed in a grid.
-- [x] give the user an option to sort the products in ascending order. Can sort by "size", "price" or "id". The products list should be reloaded when a new sorting option is chosen.
+- [x] give the user an option to sort the products in ascending order. Can sort by "size". The products list should be reloaded when a new sorting option is chosen.
 - each product has :
   - [x] a "size" field, which is the font-size (in pixels). We should display the faces in their correct size, to give customers a realistic impression of what they're buying.
   - [x] a "price" field, in cents. This should be formatted as dollars like `$3.51`.
@@ -29,36 +27,12 @@ Please read the instructions and FAQ below before beginning.
 - To paginate results use the `_page` parameter, eg: `/api/products?_page=10&_limit=15` (returns 15 results starting from the 10th page).
 - To sort results use the `_sort` parameter, eg: `/api/products?_sort=price`. Valid sort values are `price`, `size` and `id`.
 
-## FAQ
+## Instructions
 
 ### How do I start the app?
 
-Start with `npm start`. The server will look for any files you add to the `public/` directory.
+It uses `webpack` to serve react files and `json-server` as the backend server. To start the app,
 
-### What libraries/frameworks, packages, tools can I use?
+- first, make sure you have all the packages installed by running `npm i` to install all the dependencies
 
-You need to use React.js as the main js library and Git for version control, but other than that you are free to work with any package of your choice with two exceptions - you should not use any package/plugin for the _loading of products on scroll_ and _formatting of dates_. We want to see how you solve problems by writing your own JS code, so using any package/plugin for the above two features will immediately make us reject your submission.
-
-### What about sort order (ascending / descending)?
-
-We don't need to worry about alternate sort order for this project, we'll just use ascending-order for everything.
-
-### Can I make changes to the backend or API?
-
-No, your final solution should not include any changes to the server code.
-
-### What should I do when I'm finished?
-
-Please use Git and make regular commits while working on this app. After you have finished your work upload your app to a Github repo, and then send us an email with the link to that repo along with information about which features you have included in your solution, and provide clear instructions on how we can run your code and see the results in a browser.
-
-### How is the exam graded?
-
-We are looking for idiomatic use of javascript, and the ability to solve the problems with code that is clean and easy to read. Even though it's very small in scope, please show us how you would use the language and conventions to structure things in a clear and maintainable way. Please don't go overboard with using external packages/plugins and don't try to introduce extra complexity in your code just for the sake of showcasing your skills.
-
-Try to create a simple and elegant UI for this. You are free to use SASS or any other CSS pre-processor of your choice, but plain CSS is fine too.
-
-### This looks like it will take a while and I'm pretty busy
-
-You're right! With something open-ended like this you could easily spend a week polishing and getting it just right. We don't expect you to do this, and we'll do our best to make sure you're not disadvantaged by this.
-
-When we grade this exam we're not giving you a "score out of 100" for how many features you complete. We're trying to get some insight into your process, to see the way you work. So, by all means, spend more time if you want to. But you are also free to leave certain features out and give a written explanation of how you would approach it. The best approach is to spend your time on the features that you think is the best way to show us your strengths and experience.
+- run this command `npm run both` to run both the `webpack server` and the `json-server` and it will start the app in the browser automatically on port `9000`.
