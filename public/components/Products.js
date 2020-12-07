@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "../styles/styles.css";
-import Header from "./Header";
 
 function Products(props) {
   const [products, setProducts] = useState([]);
@@ -9,6 +8,7 @@ function Products(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [isFetching, setIsFetching] = useState(false);
   const [sortBy, setSortBy] = useState("");
+  const [end, setEnd] = useState(false);
 
   let page = 0;
   let sortName = "";
@@ -22,6 +22,7 @@ function Products(props) {
       );
       const productsData = await response.json();
 
+      if (productsData.length === 0) return setEnd(true);
       setProductsSorted((productsSorted) => [
         ...productsSorted,
         ...productsData,
@@ -37,6 +38,7 @@ function Products(props) {
       `http://localhost:3000/products?_page=${(page += 1)}&_limit=20`
     );
     const productsData = await response.json();
+    if (productsData.length === 0) return setEnd(true);
     setProducts((products) => [...products, ...productsData]);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -69,9 +71,9 @@ function Products(props) {
     fetchProducts();
   };
 
-  const handleSort = (e) => {
-    sortName = e.target.textContent.toLowerCase();
-    setSortBy(e.target.textContent.toLowerCase());
+  const handleSort = ({ target }) => {
+    sortName = target.textContent.toLowerCase();
+    setSortBy(target.textContent.toLowerCase());
     fetchProducts(sortName);
   };
 
@@ -84,13 +86,13 @@ function Products(props) {
     var elapsed = current - previous;
 
     if (elapsed < minutesUnit)
-      return Math.round(elapsed / 1000) + " seconds ago";
+      return `${Math.round(elapsed / 1000)} seconds ago`;
     if (elapsed < hoursUnit)
-      return Math.round(elapsed / minutesUnit) + " minutes ago";
+      return `${Math.round(elapsed / minutesUnit)}minutes ago`;
     if (elapsed < daysUnit)
-      return Math.round(elapsed / hoursUnit) + " hours ago";
+      return `${Math.round(elapsed / hoursUnit)} hours ago`;
     if (elapsed < weeksUnit)
-      return Math.round(elapsed / daysUnit) + " days ago";
+      return `${Math.round(elapsed / daysUnit)} days ago`;
 
     return null;
   };
@@ -170,7 +172,7 @@ function Products(props) {
                         </div>
 
                         <div className="float-right">
-                          <p style={{ fontSize: "12px" }}>
+                          <p className="text-date">
                             <small className="text-muted">Posted: </small>
                             {elapsed
                               ? elapsed
@@ -232,7 +234,7 @@ function Products(props) {
                         </div>
 
                         <div className="float-right">
-                          <p style={{ fontSize: "12px" }}>
+                          <p className="text-date">
                             <small className="text-muted">Posted: </small>
                             {elapsed
                               ? elapsed
@@ -256,7 +258,7 @@ function Products(props) {
             })}
       </div>
       <div className="row justify-content-center">
-        {products.length < 500 || productsSorted.length < 500 ? (
+        {!end ? (
           <div className="col-sm-auto">
             Loading more...{" "}
             <span className="spinner-border spinner-border-sm text-primary"></span>
