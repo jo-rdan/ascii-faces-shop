@@ -36,3 +36,10 @@ It uses `webpack` to serve react files and `json-server` as the backend server. 
 - first, make sure you have all the packages installed by running `npm i` to install all the dependencies
 
 - run this command `npm run both` to run both the `webpack server` and the `json-server` and it will start the app in the browser automatically on port `9000`.
+
+### Feature I left out
+
+- sort by price or ID
+  - I would approach this by storing an option into two variables one as the original and the other as the temporary variable, If I want to append the new data to the data in the state or overwrite the data, I would check first if the option chosen is the same as the in the temp variable, if it is, then I would append otherwise I would overwrite with the new data.
+- Ads Features
+  - The way I would approach it, I would find watch for the products data array length if it is divisible by 20 I would show the ads otherwise they would be hidden.

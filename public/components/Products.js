@@ -29,10 +29,7 @@ function Products(props) {
       ]);
       setIsLoading(false);
       window.addEventListener("scroll", handleScrollSort);
-      return () => {
-        window.removeEventListener("scroll", handleScrollSort);
-        sortName = "";
-      };
+      return;
     }
     const response = await fetch(
       `http://localhost:3000/products?_page=${(page += 1)}&_limit=20`
@@ -41,11 +38,11 @@ function Products(props) {
     if (productsData.length === 0) return setEnd(true);
     setProducts((products) => [...products, ...productsData]);
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
   };
 
   useEffect(() => {
     fetchProducts();
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleScrollSort = async (sortName) => {
